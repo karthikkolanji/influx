@@ -1,9 +1,12 @@
 package com.startedup.base.ui.imdb;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +22,7 @@ import butterknife.ButterKnife;
 public class TopRatedMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ResultsItem> list;
+    private int lastPosition = -1;
 
     TopRatedMovieAdapter(List<ResultsItem> list) {
         this.list = list;
@@ -55,6 +59,8 @@ public class TopRatedMovieAdapter extends RecyclerView.Adapter<RecyclerView.View
         TextView tvMovieDate;
         @BindView(R.id.tv_movie_rating)
         TextView tvMovieRating;
+        @BindView(R.id.cv_root)
+        CardView cvRoot;
 
         MovieViewHolder(View itemView) {
             super(itemView);
@@ -62,14 +68,25 @@ public class TopRatedMovieAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
 
         public void bindView(MovieViewHolder viewHolder, int position) {
-            ResultsItem item=list.get(position);
+            ResultsItem item = list.get(position);
             viewHolder.tvMovieName.setText(item.getTitle());
             viewHolder.tvMovieDesc.setText(item.getOverview());
             viewHolder.tvMovieDate.setText(item.getReleaseDate());
             //viewHolder.tvMovieRating.setText(item.getVoteCount());
-            Glide.with(viewHolder.ivPoster.getContext()).load("http://image.tmdb.org/t/p/w185//"+item.getPosterPath())
+            Glide.with(viewHolder.ivPoster.getContext()).load("http://image.tmdb.org/t/p/w185//" + item.getPosterPath())
                     .thumbnail(0.1f).into(viewHolder.ivPoster);
+            enterAnimation(viewHolder.cvRoot, position);
 
+        }
+    }
+
+    public void enterAnimation(CardView cardView, int position) {
+        if (position > lastPosition) {
+            LayoutAnimationController animation =
+                    AnimationUtils.loadLayoutAnimation(cardView.getContext(),
+                            R.anim.layout_animation_fall_down);
+            cardView.setLayoutAnimation(animation);
+            lastPosition = position;
         }
     }
 }

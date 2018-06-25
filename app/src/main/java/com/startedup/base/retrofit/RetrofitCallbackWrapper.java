@@ -7,13 +7,12 @@ import com.startedup.base.utils.ResourceFinder;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.net.SocketTimeoutException;
+import java.net.ConnectException;
+import java.net.UnknownHostException;
 
 import io.reactivex.observers.DisposableObserver;
 import okhttp3.ResponseBody;
-import retrofit2.HttpException;
 
 // source : https://medium.com/mindorks/rxjava2-and-retrofit2-error-handling-on-a-single-place-8daf720d42d6
 
@@ -28,6 +27,7 @@ public abstract class RetrofitCallbackWrapper<T extends BaseResponse> extends Di
         this.weakReference = new WeakReference<>(view);
         this.isDialog = isDialog;
         view = weakReference.get();
+        view.hideError();
         view.showLoading(isDialog, "Please wait");
     }
 
@@ -46,15 +46,10 @@ public abstract class RetrofitCallbackWrapper<T extends BaseResponse> extends Di
     public void onError(Throwable e) {
         view = weakReference.get();
         view.hideLoading();
-        if (e instanceof HttpException) {
-            ResponseBody responseBody = ((HttpException) e).response().errorBody();
-            view.showError(isDialog, ResourceFinder.getString(R.string.unknown_error));
-        } else if (e instanceof SocketTimeoutException) {
-            view.showError(isDialog, ResourceFinder.getString(R.string.timeout_error));
-        } else if (e instanceof IOException) {
-            view.showError(isDialog, ResourceFinder.getString(R.string.network_error));
+        if (e instanceof UnknownHostException || e instanceof ConnectException) {
+            view.showNetworkError(isDialog, ResourceFinder.getString(R.string.network_error));
         } else {
-            view.showError(isDialog, ResourceFinder.getString(R.string.network_error));
+            view.showUnknownError(isDialog, ResourceFinder.getString(R.string.unknown_error));
         }
     }
 

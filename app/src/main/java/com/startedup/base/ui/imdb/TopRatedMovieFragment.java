@@ -1,6 +1,5 @@
 package com.startedup.base.ui.imdb;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.startedup.base.R;
 import com.startedup.base.model.movies.TopRatedMovieResponse;
@@ -19,13 +20,11 @@ import com.startedup.base.ui.base.BaseView;
 import com.startedup.base.utils.ResourceFinder;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import timber.log.Timber;
 
 public class TopRatedMovieFragment extends BaseFragment implements BaseView {
 
@@ -33,8 +32,14 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
     @BindView(R.id.rv_top_rated_movies)
     RecyclerView rvTopRatedMovies;
     Unbinder unbinder;
-    @BindView(R.id.bt_load)
-    Button btLoad;
+    @BindView(R.id.pb_loading)
+    ProgressBar pbLoading;
+    @BindView(R.id.tv_message)
+    TextView tvMessage;
+    @BindView(R.id.iv_error)
+    ImageView ivError;
+    @BindView(R.id.tv_error)
+    TextView tvError;
     private View mView;
 
     private ProgressDialog progressDialog;
@@ -45,9 +50,22 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
     // LayoutManager
     private LinearLayoutManager mLinearLayoutManager;
 
+    public TopRatedMovieFragment() {
+    }
+
+    public static TopRatedMovieFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        TopRatedMovieFragment fragment = new TopRatedMovieFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_top_rated_movie, container, false);
         unbinder = ButterKnife.bind(this, mView);
         return mView;
@@ -56,8 +74,13 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter = new TopRatedMoviePresenter(new WeakReference(this));
         initViews();
+        init();
+    }
+
+    private void init() {
+        mPresenter = new TopRatedMoviePresenter(new WeakReference(this));
+        mPresenter.getTopRatedMovies();
     }
 
     private void initViews() {
@@ -65,29 +88,39 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
         rvTopRatedMovies.setLayoutManager(mLinearLayoutManager);
     }
 
-
     @Override
     public void showLoading(boolean isDialog, String loadingMessage) {
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage(loadingMessage);
-        progressDialog.show();
+        pbLoading.setVisibility(View.VISIBLE);
+        tvMessage.setVisibility(View.VISIBLE);
+        tvMessage.setText(loadingMessage);
     }
 
     @Override
     public void hideLoading() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
+        pbLoading.setVisibility(View.GONE);
+        tvMessage.setVisibility(View.GONE);
     }
 
     @Override
-    public void showError(boolean isDialog, String errorMessage) {
-        showToastLong(errorMessage);
+    public void showNetworkError(boolean isDialog, String errorMessage) {
+        ivError.setVisibility(View.VISIBLE);
+        tvError.setVisibility(View.VISIBLE);
+        ivError.setImageResource(R.drawable.im_no_internet);
+        tvError.setText(errorMessage);
+    }
+
+    @Override
+    public void showUnknownError(boolean isDialog, String errorMessage) {
+        ivError.setVisibility(View.VISIBLE);
+        tvError.setVisibility(View.VISIBLE);
+        ivError.setImageResource(R.drawable.im_something_went_wrong);
+        tvError.setText(errorMessage);
     }
 
     @Override
     public void hideError() {
-
+        ivError.setVisibility(View.GONE);
+        tvError.setVisibility(View.GONE);
     }
 
     @Override
@@ -95,23 +128,17 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
         TopRatedMovieResponse response = (TopRatedMovieResponse) object;
         TopRatedMovieAdapter movieAdapter = new TopRatedMovieAdapter(response.getResults());
         rvTopRatedMovies.setAdapter(movieAdapter);
-        Timber.wtf("onSuccess");
+    }
+
+    @OnClick({R.id.iv_error, R.id.tv_error})
+    public void onRetryClicked(View view) {
+        mPresenter.getTopRatedMovies();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
-
-    @OnClick(R.id.bt_load)
-    public void onLoadClicked() {
-        mPresenter.getTopRatedMovies();
-        ArrayList<String> permissionArray = new ArrayList<>();
-        permissionArray.add(Manifest.permission.RECORD_AUDIO);
-        permissionArray.add(Manifest.permission.CAMERA);
-        permissionArray.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        requestMultiplePermission(permissionArray);
     }
 
     @Override

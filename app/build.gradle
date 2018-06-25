@@ -32,14 +32,14 @@ android {
         prodFlavour {
             dimension 'flavor'
             applicationId "hiranandani.select"
-            buildConfigField("String", "BASE_URL", "\"http://production.com\"")
-            resValue "string", "app_name", "AppName"
+            buildConfigField("String", "BASE_URL", "\"http://api.themoviedb.org/3/\"")
+            resValue "string", "app_name", "BaseCode"
         }
         stagFlavour {
             dimension 'flavor'
             applicationId "hiranandani.select.stag"
-            buildConfigField("String", "BASE_URL", "\"http://stag.com\"")
-            resValue "string", "app_name", "AppNameStag"
+            buildConfigField("String", "BASE_URL", "\"yout stage url\"")
+            resValue "string", "app_name", "BaseCodeStag"
         }
     }
     sourceSets {
