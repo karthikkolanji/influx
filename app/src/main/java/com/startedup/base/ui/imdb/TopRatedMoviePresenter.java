@@ -28,7 +28,7 @@ public class TopRatedMoviePresenter {
         Observable observable = RetrofitClient.getRetrofit().create(ApiService.class).getTopRatedMovies(ConfigConstant.IMDB_KEY);
 
         observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new RetrofitCallbackWrapper(view.get(), true) {
+                .subscribeWith(new RetrofitCallbackWrapper(view.get()) {
                 });
 
     }

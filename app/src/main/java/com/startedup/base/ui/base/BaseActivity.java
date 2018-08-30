@@ -28,9 +28,9 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkS
 
     private NetworkStateReceiver mNetworkStateReceiver;
 
-    protected abstract void onPermissionAllGranted();
+    protected abstract void onMultiplePermissionGranted();
 
-    protected abstract void onPermissionGranted();
+    protected abstract void onSinglePermissionGranted();
 
     protected abstract void onNetworkOn();
 
@@ -70,7 +70,7 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkS
         PermissionUtil.requestMultiplePermission(this, permissionList, new PermissionResultListener() {
             @Override
             public void onAllPermissionGranted() {
-                onPermissionAllGranted();
+                BaseActivity.this.onMultiplePermissionGranted();
             }
 
             @Override
@@ -101,7 +101,7 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkS
 
             @Override
             public void onPermissionGranted() {
-                BaseActivity.this.onPermissionGranted();
+                BaseActivity.this.onSinglePermissionGranted();
             }
 
             @Override

@@ -1,13 +1,13 @@
 package com.startedup.base.ui.base;
 
 public interface BaseView {
-    void showLoading(boolean isDialog, String loadingMessage);
+    void showLoading( String loadingMessage);
 
     void hideLoading();
 
-    void showNetworkError(boolean isDialog, String errorMessage);
+    void showNetworkError( String errorMessage);
 
-    void showUnknownError(boolean isDialog, String errorMessage);
+    void showUnknownError( String errorMessage);
 
     void hideError();
 

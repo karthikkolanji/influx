@@ -89,7 +89,7 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
     }
 
     @Override
-    public void showLoading(boolean isDialog, String loadingMessage) {
+    public void showLoading( String loadingMessage) {
         pbLoading.setVisibility(View.VISIBLE);
         tvMessage.setVisibility(View.VISIBLE);
         tvMessage.setText(loadingMessage);
@@ -102,7 +102,7 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
     }
 
     @Override
-    public void showNetworkError(boolean isDialog, String errorMessage) {
+    public void showNetworkError( String errorMessage) {
         ivError.setVisibility(View.VISIBLE);
         tvError.setVisibility(View.VISIBLE);
         ivError.setImageResource(R.drawable.im_no_internet);
@@ -110,7 +110,7 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
     }
 
     @Override
-    public void showUnknownError(boolean isDialog, String errorMessage) {
+    public void showUnknownError( String errorMessage) {
         ivError.setVisibility(View.VISIBLE);
         tvError.setVisibility(View.VISIBLE);
         ivError.setImageResource(R.drawable.im_something_went_wrong);
@@ -142,12 +142,12 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
     }
 
     @Override
-    protected void onPermissionAllGranted() {
+    protected void onMultiplePermissionGranted() {
         showToastShort(ResourceFinder.getString(R.string.permission_granted));
     }
 
     @Override
-    protected void onPermissionGranted() {
+    protected void onSinglePermissionGranted() {
         showToastShort(ResourceFinder.getString(R.string.permission_granted));
     }
 

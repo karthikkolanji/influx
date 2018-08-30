@@ -31,13 +31,13 @@ android {
 
         prodFlavour {
             dimension 'flavor'
-            applicationId "hiranandani.select"
+            applicationId "com.startedup.base"
             buildConfigField("String", "BASE_URL", "\"http://api.themoviedb.org/3/\"")
             resValue "string", "app_name", "BaseCode"
         }
         stagFlavour {
             dimension 'flavor'
-            applicationId "hiranandani.select.stag"
+            applicationId "com.startedup.base.stag"
             buildConfigField("String", "BASE_URL", "\"yout stage url\"")
             resValue "string", "app_name", "BaseCodeStag"
         }

@@ -25,9 +25,9 @@ public abstract class BaseFragment extends Fragment implements NetworkStateRecei
     private BaseActivity mBaseActivity;
     private NetworkStateReceiver mNetworkStateReceiver;
 
-    protected abstract void onPermissionAllGranted();
+    protected abstract void onMultiplePermissionGranted();
 
-    protected abstract void onPermissionGranted();
+    protected abstract void onSinglePermissionGranted();
 
     protected abstract void onNetworkOn();
 
@@ -66,7 +66,7 @@ public abstract class BaseFragment extends Fragment implements NetworkStateRecei
             PermissionUtil.requestMultiplePermission(mBaseActivity, permissionList, new PermissionResultListener() {
                 @Override
                 public void onAllPermissionGranted() {
-                    onPermissionAllGranted();
+                    mBaseActivity.onMultiplePermissionGranted();
                 }
 
                 @Override
@@ -98,7 +98,7 @@ public abstract class BaseFragment extends Fragment implements NetworkStateRecei
 
                 @Override
                 public void onPermissionGranted() {
-                    mBaseActivity.onPermissionGranted();
+                    mBaseActivity.onSinglePermissionGranted();
                 }
 
                 @Override

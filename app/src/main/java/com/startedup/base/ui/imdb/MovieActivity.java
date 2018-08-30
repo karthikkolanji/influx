@@ -44,12 +44,12 @@ public class MovieActivity extends BaseActivity implements FragmentCommunication
     }
 
     @Override
-    protected void onPermissionAllGranted() {
+    protected void onMultiplePermissionGranted() {
         showToastShort(ResourceFinder.getString(R.string.permission_granted));
     }
 
     @Override
-    protected void onPermissionGranted() {
+    protected void onSinglePermissionGranted() {
         showToastShort(ResourceFinder.getString(R.string.permission_granted));
     }
 

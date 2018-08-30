@@ -20,15 +20,14 @@ public abstract class RetrofitCallbackWrapper<T extends BaseResponse> extends Di
 
     //BaseView is just a reference of a View in MVP
     private WeakReference<BaseView> weakReference;
-    private boolean isDialog = false;
+
     BaseView view;
 
-    public RetrofitCallbackWrapper(BaseView view, boolean isDialog) {
+    public RetrofitCallbackWrapper(BaseView view) {
         this.weakReference = new WeakReference<>(view);
-        this.isDialog = isDialog;
         view = weakReference.get();
         view.hideError();
-        view.showLoading(isDialog, "Please wait");
+        view.showLoading( "Please wait");
     }
 
     //protected abstract void onSuccess(T t);
@@ -47,9 +46,9 @@ public abstract class RetrofitCallbackWrapper<T extends BaseResponse> extends Di
         view = weakReference.get();
         view.hideLoading();
         if (e instanceof UnknownHostException || e instanceof ConnectException) {
-            view.showNetworkError(isDialog, ResourceFinder.getString(R.string.network_error));
+            view.showNetworkError(ResourceFinder.getString(R.string.network_error));
         } else {
-            view.showUnknownError(isDialog, ResourceFinder.getString(R.string.unknown_error));
+            view.showUnknownError(ResourceFinder.getString(R.string.unknown_error));
         }
     }
 
