@@ -8,10 +8,14 @@
 
     <!--Permission-->
     <string name="permission_denied">Permission denied. Aborting process</string>
-    <string name="permission_permanently_denied">Permission denied. Aborting process</string>git remote
+    <string name="permission_permanently_denied">Permission denied. Aborting process</string>git
+    remote
     <string name="permission_granted">Permission granted</string>
     <string name="permission_show_rationale">Show rationale</string>
-    <string name="permission_needed">You need to enable the permission in app setting to use the app.</string>
+    <string name="permission_needed">You need to enable the permission in myApp setting to use the myApp.</string>
     <string name="permission_title">Enable permission.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

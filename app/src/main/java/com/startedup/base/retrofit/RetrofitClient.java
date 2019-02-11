@@ -41,7 +41,7 @@ public class RetrofitClient {
 
     private static OkHttpClient createClient() {
         return new OkHttpClient.Builder()
-                //.cache(new Cache(new File(App.getContext().getCacheDir(), "http"), 1024 * 1024 * 10))
+                //.cache(new Cache(new File(MyApp.getContext().getCacheDir(), "http"), 1024 * 1024 * 10))
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(createHeaderInterceptor())

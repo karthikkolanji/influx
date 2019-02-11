@@ -81,7 +81,7 @@ public abstract class BaseFragment extends Fragment implements NetworkStateRecei
 
                 @Override
                 public void onPermissionDenied() {
-                    CommonUtil.showToasLong(mBaseActivity, ResourceFinder.getString(R.string.permission_denied));
+                    //CommonUtil.showToasLong(mBaseActivity, ResourceFinder.Companion.getString(R.string.permission_denied));
                 }
             });
         }
@@ -108,7 +108,7 @@ public abstract class BaseFragment extends Fragment implements NetworkStateRecei
 
                 @Override
                 public void onPermissionDenied() {
-                    showToastLong(ResourceFinder.getString(R.string.permission_denied));
+                    //showToastLong(ResourceFinder.Companion.getString(R.string.permission_denied));
                 }
             });
         }

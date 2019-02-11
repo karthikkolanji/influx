@@ -1,9 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion buildVersion.compileSdkVersion
-    buildToolsVersion buildVersion.buildToolsVersion
 
     repositories {
         maven {
@@ -18,6 +19,7 @@ android {
         versionName appVersion.versionName
         vectorDrawables.useSupportLibrary = true
         resConfigs "en"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -32,7 +34,7 @@ android {
         prodFlavour {
             dimension 'flavor'
             applicationId "com.startedup.base"
-            buildConfigField("String", "BASE_URL", "\"http://api.themoviedb.org/3/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.myjson.com/bins/\"")
             resValue "string", "app_name", "BaseCode"
         }
         stagFlavour {
@@ -64,65 +66,83 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Support library
-    implementation library.supportV7
-    implementation library.supportDesign
-    implementation library.supportRecyclerView
-    implementation library.supportAppCompat
-    implementation library.supportCardView
-    implementation library.constraintLayout
+    implementation deps.supportV7
+    implementation deps.supportDesign
+    implementation deps.supportRecyclerView
+    implementation deps.supportAppCompat
+    implementation deps.supportCardView
+    implementation deps.constraintLayout
+    implementation deps.multiDex
+
+    // Architecture Component
+    implementation deps.navigationFragment
+    implementation deps.navigationUI
+    implementation deps.viewModelLiveData
+    kapt deps.lifecycleAnnotationProcessor
+    implementation deps.room
+    kapt deps.roomAnnotationProcessor
+
+    // Dagger
+    implementation deps.dagger
+    kapt deps.daggerAnnotationProcessor
+    implementation deps.daggerAndroid
+    implementation deps.daggerSupportLibrary
+    kapt deps.daggerAndroidAnnotationProcessor
 
     // Retrofit
-    implementation library.retrofit
-    implementation library.retrofitRxAdapter
-    implementation library.gsonConverter
-    implementation library.gson
+    implementation deps.retrofit
+    implementation deps.retrofitRxAdapter
+    implementation deps.gsonConverter
+    implementation deps.gson
 
     //OkHttp Logger
-    implementation library.okhttpLoginInterceptor
+    implementation deps.okhttpLoginInterceptor
 
     // ButterKnife
-    implementation library.butterKnife
-    annotationProcessor library.butterKnifeCompiler
+    implementation deps.butterKnife
+    annotationProcessor deps.butterKnifeCompiler
 
     // Google Play Service
-    implementation library.playServiceLocation
-    implementation library.playServicesMaps
+    implementation deps.playServiceLocation
+    implementation deps.playServicesMaps
 
     // FCM
-    implementation library.fcmMessaging
+    implementation deps.fcmMessaging
 
     // Database
-    implementation library.dbFlow
-    annotationProcessor library.dbFlowProcessor
-    implementation library.dbFlowCore
+    implementation deps.dbFlow
+    annotationProcessor deps.dbFlowProcessor
+    implementation deps.dbFlowCore
 
     // Database debugging
-    //debugImplementation library.dbInspector
+    //debugImplementation deps.dbInspector
 
     // Image loading
-    implementation library.glide
-    annotationProcessor library.glideCompiler
+    implementation deps.glide
+    annotationProcessor deps.glideCompiler
 
     // Image compressor
-    implementation library.zeloryCompressor
+    implementation deps.zeloryCompressor
 
     // Image zoom
-    implementation library.photoView
+    implementation deps.photoView
 
     // Image crop
-    implementation library.soundCloudCrop
+    implementation deps.soundCloudCrop
 
     // Rx
-    implementation library.rxJava
-    implementation library.rxAndroid
+    implementation deps.rxJava
+    implementation deps.rxAndroid
 
     // Other
-    implementation library.dexterRuntimePermission
-    implementation library.timber
-    implementation library.kotlin
+    implementation deps.dexterRuntimePermission
+    implementation deps.timber
+    implementation deps.kotlin
+
 }
 repositories {
     mavenCentral()
+
 }
 
 apply plugin: 'kotlin-android-extensions'

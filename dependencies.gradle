@@ -5,9 +5,9 @@ ext.versions = [
 
         support                : '27.1.1',
 
-        constraintLayout       : '1.1.0',
+        constraintLayout       : '1.1.3',
 
-        multiDex               : '1.0.1',
+        multidex               : '1.0.3',
 
         playService            : '11.4.2',
         fcm                    : '11.4.2',
@@ -35,12 +35,18 @@ ext.versions = [
 
         timber                 : '4.6.0',
 
-        kotlin                 : '1.2.41'
+        kotlin                 : '1.3.21',
+
+        dagger                 : '2.21',
+
+        lifecycle              : '1.1.1',
+        navigation             : '1.0.0-beta01',
+
 ]
 
 ext.buildVersion = [
-        compileSdkVersion: 27,
-        buildToolsVersion: '27.0.3',
+        compileSdkVersion: 28,
+        buildToolsVersion: '28.0.3',
 ]
 
 ext.gradlePluginVersion = [
@@ -67,66 +73,81 @@ ext.abiCodes = [
 
 // Dependencies
 
-ext.library = [
+ext.deps = [
 
         // Support library
-        supportDesign          : "com.android.support:design:$versions.support",
-        constraintLayout       : "com.android.support.constraint:constraint-layout:$versions.constraintLayout",
-        supportRecyclerView    : "com.android.support:recyclerview-v7:$versions.support",
-        supportAppCompat       : "com.android.support:appcompat-v7:$versions.support",
-        supportCardView        : "com.android.support:cardview-v7:$versions.support",
-        supportV7              : "com.android.support:support-v4:$versions.support",
+        supportDesign                   : "com.android.support:design:$versions.support",
+        constraintLayout                : "com.android.support.constraint:constraint-layout:$versions.constraintLayout",
+        supportRecyclerView             : "com.android.support:recyclerview-v7:$versions.support",
+        supportAppCompat                : "com.android.support:appcompat-v7:$versions.support",
+        supportCardView                 : "com.android.support:cardview-v7:$versions.support",
+        supportV7                       : "com.android.support:support-v4:$versions.support",
+        multiDex                        : "com.android.support:multidex:$versions.multidex",
+
+        // Architecture Component
+        navigationFragment              : "android.arch.navigation:navigation-fragment-ktx:$versions.navigation",
+        navigationUI                    : "android.arch.navigation:navigation-ui-ktx:$versions.navigation",
+        viewModelLiveData               : "android.arch.lifecycle:extensions:$versions.lifecycle",
+        lifecycleAnnotationProcessor    : "android.arch.lifecycle:compiler:$versions.lifecycle",
+        room                            : "android.arch.persistence.room:runtime:$versions.lifecycle",
+        roomAnnotationProcessor         : "android.arch.persistence.room:compiler:$versions.lifecycle",
+
+        // Dagger
+        dagger                          : "com.google.dagger:dagger:$versions.dagger",
+        daggerAnnotationProcessor       : "com.google.dagger:dagger-compiler:$versions.dagger",
+        daggerAndroid                   : "com.google.dagger:dagger-android:$versions.dagger",
+        daggerSupportLibrary            : "com.google.dagger:dagger-android-support:$versions.dagger",
+        daggerAndroidAnnotationProcessor: "com.google.dagger:dagger-android-processor:$versions.dagger",
 
         // Retrofit
-        retrofit               : "com.squareup.retrofit2:retrofit:$versions.retrofit",
-        retrofitRxAdapter      : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
-        gsonConverter          : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
-        gson                   : "com.google.code.gson:gson:$versions.gson",
+        retrofit                        : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        retrofitRxAdapter               : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
+        gsonConverter                   : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+        gson                            : "com.google.code.gson:gson:$versions.gson",
 
         //OkHttp Logging Interceptor
-        okhttpLoginInterceptor : "com.squareup.okhttp3:logging-interceptor:$versions.okhttploginInterceptor",
+        okhttpLoginInterceptor          : "com.squareup.okhttp3:logging-interceptor:$versions.okhttploginInterceptor",
 
         // Butter knife
-        butterKnife            : "com.jakewharton:butterknife:$versions.butterKnife",
-        butterKnifeCompiler    : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
+        butterKnife                     : "com.jakewharton:butterknife:$versions.butterKnife",
+        butterKnifeCompiler             : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
 
         // Google Play Service
-        playServiceLocation    : "com.google.android.gms:play-services-location:$versions.playService",
-        playServicesMaps       : "com.google.android.gms:play-services-maps:$versions.playService",
+        playServiceLocation             : "com.google.android.gms:play-services-location:$versions.playService",
+        playServicesMaps                : "com.google.android.gms:play-services-maps:$versions.playService",
 
         // FCM
-        fcmMessaging           : "com.google.firebase:firebase-messaging:$versions.fcm",
+        fcmMessaging                    : "com.google.firebase:firebase-messaging:$versions.fcm",
 
         // Database
-        dbFlow                 : "com.github.Raizlabs.DBFlow:dbflow:$versions.dbFlow",
-        dbFlowProcessor        : "com.github.Raizlabs.DBFlow:dbflow-processor:$versions.dbFlow",
-        dbFlowCore             : "com.github.Raizlabs.DBFlow:dbflow-core:$versions.dbFlow",
+        dbFlow                          : "com.github.Raizlabs.DBFlow:dbflow:$versions.dbFlow",
+        dbFlowProcessor                 : "com.github.Raizlabs.DBFlow:dbflow-processor:$versions.dbFlow",
+        dbFlowCore                      : "com.github.Raizlabs.DBFlow:dbflow-core:$versions.dbFlow",
 
         // Database debugging
-        dbInspector            : "im.dino:dbinspector:$versions.dbInspector",
+        dbInspector                     : "im.dino:dbinspector:$versions.dbInspector",
 
         // Image loading
-        glide                  : "com.github.bumptech.glide:glide:$versions.glide",
-        glideCompiler          : "com.github.bumptech.glide:compiler:$versions.glide",
+        glide                           : "com.github.bumptech.glide:glide:$versions.glide",
+        glideCompiler                   : "com.github.bumptech.glide:compiler:$versions.glide",
 
         // Image compressor
-        zeloryCompressor       : "id.zelory:compressor:$versions.imageCompressor",
+        zeloryCompressor                : "id.zelory:compressor:$versions.imageCompressor",
 
         // Image zoom
-        photoView              : "com.github.chrisbanes:PhotoView:$versions.photoView",
+        photoView                       : "com.github.chrisbanes:PhotoView:$versions.photoView",
 
         // Image crop
-        soundCloudCrop         : "com.soundcloud.android:android-crop:$versions.imageCrop",
+        soundCloudCrop                  : "com.soundcloud.android:android-crop:$versions.imageCrop",
 
         // Rx
-        rxJava                 : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
-        rxAndroid              : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
+        rxJava                          : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
+        rxAndroid                       : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
 
         // Others
-        multiDex               : "com.android.support:multidex:$versions.multidex",
-        dexterRuntimePermission: "com.karumi:dexter:$versions.dexterRuntimePermission",
-        timber                 : "com.jakewharton.timber:timber:$versions.timber",
-        kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+        dexterRuntimePermission         : "com.karumi:dexter:$versions.dexterRuntimePermission",
+        timber                          : "com.jakewharton.timber:timber:$versions.timber",
+        kotlin                          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 ]
 
 

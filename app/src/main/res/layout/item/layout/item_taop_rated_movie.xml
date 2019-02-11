@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:myApp="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:id="@+id/cv_root"
     android:elevation="10dp"
-    app:cardCornerRadius="4dp">
+    myApp:cardCornerRadius="4dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,10 +21,10 @@
             android:layout_height="215dp"
             android:scaleType="centerCrop"
             android:src="@drawable/common_full_open_on_phone"
-            app:layout_constraintDimensionRatio="w,16:9"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            myApp:layout_constraintDimensionRatio="w,16:9"
+            myApp:layout_constraintLeft_toLeftOf="parent"
+            myApp:layout_constraintRight_toRightOf="parent"
+            myApp:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_movie_name"
@@ -33,9 +33,9 @@
             android:layout_margin="8dp"
             android:textColor="@android:color/black"
             android:textSize="@dimen/tv_large"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_poster"
+            myApp:layout_constraintLeft_toLeftOf="parent"
+            myApp:layout_constraintRight_toRightOf="parent"
+            myApp:layout_constraintTop_toBottomOf="@+id/iv_poster"
             tools:text="bcjhdsvjdhsvdshvsjdvsdj" />
 
 
@@ -47,9 +47,9 @@
             android:layout_marginTop="12dp"
             android:textColor="@android:color/darker_gray"
             android:textSize="@dimen/tv_small"
-            app:layout_constraintLeft_toLeftOf="@+id/tv_movie_name"
-            app:layout_constraintRight_toRightOf="@+id/tv_movie_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_name"
+            myApp:layout_constraintLeft_toLeftOf="@+id/tv_movie_name"
+            myApp:layout_constraintRight_toRightOf="@+id/tv_movie_name"
+            myApp:layout_constraintTop_toBottomOf="@+id/tv_movie_name"
             tools:text="bcjhdsvjdhsvdshvsjdvsdj" />
 
         <TextView
@@ -59,8 +59,8 @@
             android:layout_marginTop="12dp"
             android:textColor="@android:color/darker_gray"
             android:textSize="@dimen/tv_small"
-            app:layout_constraintLeft_toLeftOf="@+id/tv_movie_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_desc"
+            myApp:layout_constraintLeft_toLeftOf="@+id/tv_movie_name"
+            myApp:layout_constraintTop_toBottomOf="@+id/tv_movie_desc"
             tools:text="bcjhdsvjdhsvdshvsjdvsdj" />
 
         <TextView
@@ -70,9 +70,9 @@
             android:layout_marginLeft="8dp"
             android:textColor="@android:color/darker_gray"
             android:textSize="@dimen/tv_small"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_movie_date"
-            app:layout_constraintLeft_toRightOf="@+id/tv_movie_date"
-            app:layout_constraintTop_toTopOf="@+id/tv_movie_date"
+            myApp:layout_constraintBottom_toBottomOf="@+id/tv_movie_date"
+            myApp:layout_constraintLeft_toRightOf="@+id/tv_movie_date"
+            myApp:layout_constraintTop_toTopOf="@+id/tv_movie_date"
             tools:text="bcjhdsvjdhsvdshvsjdvsdj" />
 
     </android.support.constraint.ConstraintLayout>

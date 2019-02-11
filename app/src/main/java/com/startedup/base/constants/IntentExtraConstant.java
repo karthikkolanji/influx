@@ -2,7 +2,7 @@ package com.startedup.base.constants;
 
 public class IntentExtraConstant {
 
-    // App exception handler
+    // MyApp exception handler
     public static final String RESTARTED="IS_RESTARTED";
     public static final String LAST_EXCEPTION="LAST_EXCEPTION";
 

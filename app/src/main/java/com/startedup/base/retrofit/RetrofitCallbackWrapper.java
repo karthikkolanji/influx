@@ -46,9 +46,9 @@ public abstract class RetrofitCallbackWrapper<T extends BaseResponse> extends Di
         view = weakReference.get();
         view.hideLoading();
         if (e instanceof UnknownHostException || e instanceof ConnectException) {
-            view.showNetworkError(ResourceFinder.getString(R.string.network_error));
+            //view.showNetworkError(ResourceFinder.Companion.getString(R.string.network_error));
         } else {
-            view.showUnknownError(ResourceFinder.getString(R.string.unknown_error));
+            //view.showUnknownError(ResourceFinder.Companion.getString(R.string.unknown_error));
         }
     }
 

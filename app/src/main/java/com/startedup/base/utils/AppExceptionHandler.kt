@@ -6,9 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Process
 import timber.log.Timber
+import javax.inject.Singleton
 
 // source : https://proandroiddev.com/hide-your-crashes-gracefully-and-still-report-them-9b1c85b25875
 
+@Singleton
 class AppExceptionHandler(val systemHandler: Thread.UncaughtExceptionHandler,
                           val crashlyticsHandler: Thread.UncaughtExceptionHandler,
                           application: Application) : Thread.UncaughtExceptionHandler {

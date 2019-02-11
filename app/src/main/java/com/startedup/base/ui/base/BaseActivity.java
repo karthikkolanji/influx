@@ -85,7 +85,7 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkS
 
             @Override
             public void onPermissionDenied() {
-                showToastLong(ResourceFinder.getString(R.string.permission_denied));
+                //showToastLong(ResourceFinder.Companion.getString(R.string.permission_denied));
             }
         });
 
@@ -111,7 +111,7 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkS
 
             @Override
             public void onPermissionDenied() {
-                showToastLong(ResourceFinder.getString(R.string.permission_denied));
+                //showToastLong(ResourceFinder.Companion.getString(R.string.permission_denied));
             }
         });
     }

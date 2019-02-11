@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:myApp="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,10 +12,10 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:visibility="gone"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        myApp:layout_constraintLeft_toLeftOf="parent"
+        myApp:layout_constraintRight_toRightOf="parent"
+        myApp:layout_constraintTop_toTopOf="parent"
+        myApp:layout_constraintBottom_toBottomOf="parent"
         />
 
     <TextView
@@ -27,9 +27,9 @@
         android:visibility="gone"
         android:textColor="@android:color/black"
         android:textSize="@dimen/tv_large"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_error"
+        myApp:layout_constraintLeft_toLeftOf="parent"
+        myApp:layout_constraintRight_toRightOf="parent"
+        myApp:layout_constraintTop_toBottomOf="@+id/iv_error"
         tools:text="bcjhdsvjdhsvdshvsjdvsdj"
         />
 
